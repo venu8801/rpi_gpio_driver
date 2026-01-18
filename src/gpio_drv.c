@@ -8,6 +8,7 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <gpio_drv.h>
+#include <asm/io.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Venu Gopal Atchyutanna <venu.ark.prasad@gmail.com>");
@@ -27,8 +28,17 @@ struct file_operations gpio_drv_fops = {
 
 int gpio_drv_open(struct inode *filenode, struct file *f_object)
 {
+    int ret = GPIO_SUCCESS;
     printk(KERN_INFO "GPIO Driver - Opened");
-    return GPIO_SUCCESS;
+    // io-remap the physical address to kernels virtual address space
+    gpio_cdevObj.gpio_base = ioremap(GPIO_FSEL_BASE, GPIO_REG_SIZE);
+    if (gpio_cdevObj.gpio_base == NULL) {
+        printk(KERN_ERR "Failed to map the GPIO base addr");
+        ret = GPIO_IOREMAP_FAIL;
+        goto exit;
+    }
+exit:
+    return ret;
 }
 
 int gpio_drv_close(struct inode *file_node, struct file *f_object)
@@ -89,7 +99,6 @@ void __exit gpio_drv_exit(void)
     printk(KERN_INFO "Rpi GPIO Drv exit");
     unregister_chrdev_region(gpio_cdevObj.gpio_dev_num, 1);
     cdev_del(&gpio_cdevObj.gpio_drv_cdev);
-exit:
     return;
 }
 

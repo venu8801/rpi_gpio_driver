@@ -3,8 +3,10 @@
 export ARCH=arm64
 export CROSS_COMPILE=aarch64-linux-gnu-
 
-obj-m += \
-	src/gpio_drv.o
+obj-m := gpio_drv.o
+
+gpio_drv-objs := src/gpio_drv.o \
+				 src/gpio_common.o
 
 EXTRA_CFLAGS=-I$(PWD)/inc
 
