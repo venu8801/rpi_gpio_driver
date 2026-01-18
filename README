@@ -1,0 +1,19 @@
+!!! Work in Progress .............................
+
+GPIO driver for the raspberry pi zero 2w (OUT-OF-TREE)
+
+This is a single device drvier which a userspace application can use to 
+toggle to or read from a GPIO pin on the board.
+
+The register addresses and other info are referenced from the following:
+
+Raspberry Pi RP3A0 details: [text](https://www.raspberrypi.com/documentation/computers/processors.html#rp3a0)
+
+
+ARM peripherals documentation: [text](https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf)
+
+Build Instructions:
+
+Pre-requisites: arm 64 bit cross compiler for x86
+
+Run the following commands to setup the env:
