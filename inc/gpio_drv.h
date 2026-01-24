@@ -53,6 +53,7 @@ typedef struct {
 #define GPIO_PLVL0(GPIO_FSEL_MMIO_BASE) GPIO_FSEL_MMIO_BASE + 0x34
 #define GPIO_PLVL1(GPIO_FSEL_MMIO_BASE) GPIO_FSEL_MMIO_BASE + 0x38
 
+
 //todo: more GPIO register to be added
 
 

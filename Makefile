@@ -16,7 +16,7 @@ endif
 
 KDIR = /home/venu/projects/linux
 
-all:
+gpio_driver:
 	make -C $(KDIR)  M=$(shell pwd) modules
 
 clean:
